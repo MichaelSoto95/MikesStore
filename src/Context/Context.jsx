@@ -22,17 +22,26 @@ function CartProvider({ children }) {
     return quantity.quantity;
   };
 
-  const AddToCart = (id) => {
+  const AddToCart = (id, image, title, price) => {
     const quantity = getproductQuantity(id);
     // console.log(id);
     // console.log(quantity);
 
     if (quantity === 0) {
-      setCartProducts([...cartProducts, { id: id, quantity: 1 }]);
+      setCartProducts([
+        ...cartProducts,
+        { id: id, quantity: 1, image: image, title: title, price: price },
+      ]);
     } else {
       const updatedCart = cartProducts.map((product) => {
         if (product.id === id)
-          return { ...product, quantity: product.quantity + 1 };
+          return {
+            ...product,
+            quantity: product.quantity + 1,
+            image: image,
+            title: title,
+            price: price,
+          };
         else return product;
       });
       setCartProducts(updatedCart);
@@ -61,12 +70,17 @@ function CartProvider({ children }) {
         );
   };
   const GetCost = () => {
-    // cartProducts.map((item) => {});
+    const total = 0;
+    cartProducts.forEach((item) => {
+      total += item.quantity * item.price;
+    });
+
+    return total;
   };
 
   const ContextValue = {
     items: cartProducts,
-    // getItems,
+    getproductQuantity,
     AddToCart,
     decreaseFromCart,
     deleteFromCart,

@@ -3,11 +3,12 @@ import axios from "axios";
 import "./App.css";
 import Nav from "./assets/components/nav";
 import Footer from "./assets/components/footer";
-//import Cart from "./assets/routes/Cart";
 import MainPage from "./assets/components/MainPage";
-import { BrowserRouter as router, Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Loading from "./assets/components/Loading";
-
+import Cart from "./assets/routes/Cart";
+import Error from "./assets/routes/Error";
+import { ProductDetail } from "./assets/routes/ProductDetail";
 function App() {
   const [products, setProducts] = useState([]);
   const url = `https://fakestoreapi.com/products?limit=20`;
@@ -34,7 +35,18 @@ function App() {
   return (
     <>
       <Nav />
-      {isLoading ? <Loading /> : <MainPage products={products} />}
+      <Routes>
+        <Route
+          path="/"
+          element={isLoading ? <Loading /> : <MainPage products={products} />}
+        />
+        <Route path="/cart" element={<Cart />} />
+        {/* <Route path="/:productId">
+          <ProductDetail />
+        </Route> */}
+        <Route path="*" element={<Error />} />
+      </Routes>
+
       <Footer />
     </>
   );

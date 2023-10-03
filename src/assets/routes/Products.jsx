@@ -5,8 +5,9 @@ import { CartContext } from "../../Context/Context";
 const Products = ({ title, image, price, id }) => {
   const { AddToCart, decreaseFromCart, deleteFromCart, getproductQuantity } =
     useContext(CartContext);
-  // console.log(items);
-  //const quantity = () => getproductQuantity(id);
+
+  const quantity = getproductQuantity(id);
+  //console.log(quantity);
   return (
     <div className="product-item">
       <h3>{title}</h3>
@@ -19,27 +20,29 @@ const Products = ({ title, image, price, id }) => {
       <div className="image-container">
         <img src={image} alt="item" />
       </div>
-      <div className="controls">
-        <label htmlFor="input">Quantity: </label>
-        {/* <input onChange={(e)=>SetQty(Number(e.target.value))} maxLength="2" onKeyPress={(event) => {if (!/[0-9]/.test(event.key)) {event.preventDefault();}}}/> */}
-        <input
-          type="number"
-          // onChange={(e) => props.SetQty(Number(e.target.value))}
-          // min="1"
-          // max="5"
-          // maxLength="2"
-          // placeholder="1"
-          // value={quantity}
-        />
-        <button onClick={() => AddToCart(id)}>Add</button>
-        <button onClick={() => decreaseFromCart(id)}>decrease</button>
-        <button
-          onClick={() => {
-            deleteFromCart(id);
-          }}>
-          remove
-        </button>
-      </div>
+
+      {quantity > 0 ? (
+        <div className="controls">
+          <p>Quantity:{quantity}</p>
+
+          <button onClick={() => AddToCart(id, image, title, price)}>+</button>
+          <button onClick={() => decreaseFromCart(id)}>-</button>
+          <button
+            style={{ backgroundColor: "red" }}
+            onClick={() => {
+              deleteFromCart(id);
+            }}>
+            Remove
+          </button>
+        </div>
+      ) : (
+        <div className="controls">
+          <p>Quantity:{quantity}</p>
+          <button onClick={() => AddToCart(id, image, title, price)}>
+            Add to cart
+          </button>
+        </div>
+      )}
     </div>
   );
 };
