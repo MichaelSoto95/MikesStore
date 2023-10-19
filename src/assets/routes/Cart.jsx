@@ -37,15 +37,18 @@ const Cart = () => {
                   Remove
                 </button>
               </div>
-              <p>Quantity:{prod.quantity} </p>
-              <p>
-                Price:
-                {prod.price.toLocaleString("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                })}
-              </p>
-              <p>Total:${(prod.price * prod.quantity).toFixed(2)}</p>
+
+              <div className="product-price">
+                <p>Quantity:{prod.quantity} </p>
+                <p>
+                  Price:
+                  {prod.price.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  })}
+                </p>
+                <p>Total:${(prod.price * prod.quantity).toFixed(2)}</p>
+              </div>
             </div>
           </div>
         );

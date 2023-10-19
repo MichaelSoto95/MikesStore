@@ -50,4 +50,5 @@
   height: 60px;
   width: 100%;
   color: white;
+  z-index: 1;
 }

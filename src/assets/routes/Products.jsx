@@ -24,7 +24,6 @@ const Products = ({ title, image, price, id }) => {
       {quantity > 0 ? (
         <div className="controls">
           <p>Quantity:{quantity}</p>
-
           <button onClick={() => AddToCart(id, image, title, price)}>+</button>
           <button onClick={() => decreaseFromCart(id)}>-</button>
           <button
