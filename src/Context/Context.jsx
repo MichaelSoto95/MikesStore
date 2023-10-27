@@ -70,9 +70,11 @@ function CartProvider({ children }) {
         );
   };
   const GetCost = () => {
-    const total = 0;
+    let total = 0;
     cartProducts.forEach((item) => {
-      total += item.quantity * item.price;
+      let subTotal = item.quantity * item.price;
+      console.log(subTotal);
+      total += subTotal;
     });
 
     return total;
@@ -86,10 +88,6 @@ function CartProvider({ children }) {
     deleteFromCart,
     GetCost,
   };
-  //checar despues para presentar en cart
-  //   const result = partyCtx
-  //     .filter((p) => planList.includes(p.planCode)) // filter on items with planCode in planList
-  //     .map(({ planCode, planShortName }) => ({ planCode, planShortName })); //
 
   return (
     <CartContext.Provider value={ContextValue}>{children}</CartContext.Provider>
